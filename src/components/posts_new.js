@@ -13,16 +13,25 @@ class PostsNew extends Component{
   // this field contains an event renderer to wire up to the Field
   // formatting style goes here
   // the error uses the name of the field and cross checks with errors function by name
+
+  // Only show eeror after the user touched the field
   renderField(field){
+    // destructuring to access properties inside the meta object
+    // ES6 stuff
+    const { meta: { touched, error } } = field;
+    const className = `form-group ${touched && error ? 'has-danger' : ''}`;
+
     return(
-      <div className='form-group'>
+      <div className={className}>
         <label>{field.label}</label>
         <input
           className='form-control'
           type={field.type}
           {...field.input}
         />
-        {field.meta.error}
+        <div className='text-help'>
+          {touched ? error : ''}
+        </div>
       </div>
     );
   }
