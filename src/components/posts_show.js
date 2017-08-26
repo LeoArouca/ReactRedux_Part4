@@ -20,8 +20,21 @@ class PostsShow extends Component {
 
     // this.props = ownProps;
 
+    const { post } = this.props;
+
+    if(!post){
+      return <div>Loading ...</div>;
+    }
+
+    console.log('---------------');
+    console.log(post);
+
     return (
-      <div>Show</div>
+      <div>
+        <h3>{post.title}</h3>
+        <h6>{post.categories}</h6>
+        <p>{post.content}</p>
+      </div>
     );
   }
 }
@@ -31,7 +44,10 @@ class PostsShow extends Component {
 function mapStateToProps({ posts }, ownProps){
   // for option 1
   // return { posts };
+  console.log(posts);
   return { post: posts[ownProps.match.params.id] };
 }
 
-export default connect(null, { fetchPost })(PostsShow);
+// IF DOES NOT SHOW, MISSED REPLACING NULL HERE
+// export default connect(null, { fetchPost })(PostsShow);
+export default connect(mapStateToProps, { fetchPost })(PostsShow);

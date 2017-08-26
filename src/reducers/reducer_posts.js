@@ -21,7 +21,7 @@ export default function(state = {}, action){
 
       // ES6
       // these square brackets are NOT!!! for array
-      return { ...state, [action.payload.data.id]: action.payload.data.id }
+      return { ...state, [action.payload.data.id]: action.payload.data }
 
     default:
       return state;
