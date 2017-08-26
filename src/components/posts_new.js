@@ -12,6 +12,7 @@ class PostsNew extends Component{
 
   // this field contains an event renderer to wire up to the Field
   // formatting style goes here
+  // the error uses the name of the field and cross checks with errors function by name
   renderField(field){
     return(
       <div className='form-group'>
@@ -21,15 +22,25 @@ class PostsNew extends Component{
           type={field.type}
           {...field.input}
         />
+        {field.meta.error}
       </div>
     );
   }
 
+  onSubmit(values){
+    console.log(values);
+  }
+
   // Label is an arbitrary property that gets passed down and can be re-used
   // you can add many properties to it
+  // on submit -> redux form handles the state, it does not take care of the posting to back end server
   render(){
+    const { handleSubmit } = this.props;
+
+    // this.onSubmit.bind(this)
+    // to make sure its bound to this from the overall component
     return(
-      <form>
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <Field
           name='title'
           component={this.renderField}
@@ -48,6 +59,7 @@ class PostsNew extends Component{
           label='Post content'
           type='text'
         />
+        <button type='submit' className='btn btn-primary'>Submit</button>
       </form>
     );
   }
