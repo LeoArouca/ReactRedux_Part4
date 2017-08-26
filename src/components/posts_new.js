@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 // Redux form stuff
 // redux form allows this component to talk to redux store (like connect)
 import { Field, reduxForm } from 'redux-form';
-
+// Add navigation stuff
+import { Link } from 'react-router-dom';
 
 // component={} property
 // field does not know how to show on the screen, only to interact to redux form
@@ -69,6 +70,7 @@ class PostsNew extends Component{
           type='text'
         />
         <button type='submit' className='btn btn-primary'>Submit</button>
+        <Link to='/' className='btn btn-danger'>Cancel</Link>
       </form>
     );
   }
