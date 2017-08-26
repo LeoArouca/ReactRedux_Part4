@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPost } from '../actions';
+import { Link } from 'react-router-dom';
 
 class PostsShow extends Component {
 
   componentDidMount(){
+    // could prevent the refetch with if (!this.props.post){}
+
     // Provided directly to us by react router
     const postId = this.props.match.params.id;
     console.log(postId);
@@ -31,6 +34,7 @@ class PostsShow extends Component {
 
     return (
       <div>
+        <Link to='/'>Back</Link>
         <h3>{post.title}</h3>
         <h6>{post.categories}</h6>
         <p>{post.content}</p>
