@@ -3,7 +3,7 @@
 // _.mapKeys(array, 'id');
 import _ from 'lodash';
 
-import { FETCH_POSTS, FETCH_POST } from '../actions';
+import { FETCH_POSTS, FETCH_POST, DELETE_POST } from '../actions';
 
 export default function(state = {}, action){
   switch (action.type){
@@ -22,7 +22,9 @@ export default function(state = {}, action){
       // ES6
       // these square brackets are NOT!!! for array
       return { ...state, [action.payload.data.id]: action.payload.data }
-
+    case DELETE_POST:
+      // omits it, and by the time data returns its all good
+      return _.omit(state, action.payload);
     default:
       return state;
   }
