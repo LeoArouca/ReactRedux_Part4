@@ -19,7 +19,9 @@ class PostsShow extends Component {
     // best option
     const { id } = this.props.match.params;
     // option 2 this.props.post.id    // assumes the post is here in the component, not good
-    this.props.deletePost(id);
+    this.props.deletePost(id, () => {
+      this.props.history.push('/');
+    });
   }
 
   render(){

@@ -40,11 +40,13 @@ export function fetchPost(id){
   }
 }
 
-export function deletePost(id){
-  const request = axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`);
+export function deletePost(id, callback){
+  // navigate back only after success
+  const request = axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`).then(() => callback());
 
+  // Need to remove the request, the post, sends the ID in
   return{
     type: DELETE_POST,
-    payload: request
+    payload: id
   }
 }
