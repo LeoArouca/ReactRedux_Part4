@@ -4,6 +4,9 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 // Add navigation stuff
 import { Link } from 'react-router-dom';
+// Add action creator
+import { connect } from 'react-redux';
+import { createPost } from '../actions';
 
 // component={} property
 // field does not know how to show on the screen, only to interact to redux form
@@ -38,7 +41,9 @@ class PostsNew extends Component{
   }
 
   onSubmit(values){
+    // this === component
     console.log(values);
+    this.props.createPost(values);
   }
 
   // Label is an arbitrary property that gets passed down and can be re-used
@@ -96,9 +101,11 @@ function validate(values){
 }
 
 // Name of the for is the form thingy in the middle
-
 // validate, => validate: validate
+
 export default reduxForm({
   validate,
   form: 'PostsNewForm'
-})(PostsNew);
+})(
+  connect(null,{ createPost })(PostsNew)
+);
