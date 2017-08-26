@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPost } from '../actions';
+import { fetchPost, deletePost } from '../actions';
 import { Link } from 'react-router-dom';
 
 class PostsShow extends Component {
@@ -13,6 +13,13 @@ class PostsShow extends Component {
     console.log(postId);
 
     this.props.fetchPost(postId);
+  }
+
+  onDeleteClick(){
+    // best option
+    const { id } = this.props.match.params;
+    // option 2 this.props.post.id    // assumes the post is here in the component, not good
+    this.props.deletePost(id);
   }
 
   render(){
@@ -35,6 +42,10 @@ class PostsShow extends Component {
     return (
       <div>
         <Link to='/'>Back</Link>
+        <button
+          className='btn btn-danger pull-xs-right'
+          onClick={this.onDeleteClick.bind(this)}
+        >Delete post</button>
         <h3>{post.title}</h3>
         <h6>{post.categories}</h6>
         <p>{post.content}</p>
@@ -54,4 +65,4 @@ function mapStateToProps({ posts }, ownProps){
 
 // IF DOES NOT SHOW, MISSED REPLACING NULL HERE
 // export default connect(null, { fetchPost })(PostsShow);
-export default connect(mapStateToProps, { fetchPost })(PostsShow);
+export default connect(mapStateToProps, { fetchPost, deletePost })(PostsShow);
