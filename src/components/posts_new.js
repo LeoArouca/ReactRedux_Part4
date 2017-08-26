@@ -43,11 +43,15 @@ class PostsNew extends Component{
   onSubmit(values){
     // this === component
     console.log(values);
-    this.props.createPost(values);
 
-    console.log(this.props.history);
-    // Navigates to root route
-    this.props.history.push('/');
+    // this is passing it down to action creator
+    this.props.createPost(values, () => {
+      this.props.history.push('/');
+    });
+
+    // console.log(this.props.history);
+    // // Navigates to root route
+    // this.props.history.push('/');
   }
 
   // Label is an arbitrary property that gets passed down and can be re-used
